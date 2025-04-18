@@ -164,7 +164,7 @@ const elementSymbols: ElementSymbols = {
 const elementEmojis: Record<ElementType, string> = {
   'wood': '🌳',
   'fire': '🔥',
-  'earth': '🌾',
+  'earth': 'ᨒ',
   'metal': '🔱',
   'water': '💧'
 };
