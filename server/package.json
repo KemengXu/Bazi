@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bazi-converter": "^1.0.10",
+    "http": "^0.0.1-security"
+  }
+}
