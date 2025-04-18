@@ -279,7 +279,10 @@
   
   // Fetch Bazi data from API
   const fetchBaziData = (date: Date) => {
-    const apiUrl = 'http://localhost:8080/' + 
+    // Define the API base URL from environment variables
+    const apiBaseUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:8080';
+      
+    const apiUrl = apiBaseUrl + '/' + 
       date.getFullYear() + "/" + 
       (date.getMonth() + 1) + "/" + 
       date.getDate() + "/" + 
