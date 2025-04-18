@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 defineProps<{ msg: string }>()
+const elementEmojis: Record<string, string> = {
+    'wood': '🌳',
+    'fire': '🔥',
+    'earth': 'ᨒ',
+    'metal': '🔱',
+    'water': '💧'
+  };
 
-const count = ref(0)
 </script>
 
 <template>
   <div class="title-container">
     <h1>{{ msg }}</h1>
-    <p class="subtitle">The nature is made of five basic elements: metal, wood, water, fire, and earth. Which elements are you made of? Which element represents the real you? Discover the ancient wisdom of Chinese metaphysics</p>
+    <p class="subtitle">
+      <div>The nature is made of five basic elements:</div>
+      <div>metal {{ elementEmojis.metal }}, wood {{ elementEmojis.wood }}, water {{ elementEmojis.water }}, fire {{ elementEmojis.fire }}, and earth {{ elementEmojis.earth }}.</div>
+      <div>Which elements are you made of? Which element represents the real you?</div>
+      <div>Discover the ancient wisdom of Chinese metaphysics</div>
+    </p>
   </div>
 
   <!-- <div class="card">
@@ -73,6 +82,7 @@ h1 {
   margin-bottom: 1rem;
   background: linear-gradient(135deg, #fff, #ccc);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
@@ -82,7 +92,7 @@ h1 {
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 0;
   letter-spacing: 1px;
-  font-weight: 300;
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {
