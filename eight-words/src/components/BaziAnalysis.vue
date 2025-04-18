@@ -73,19 +73,6 @@ type ElementType = 'wood' | 'fire' | 'earth' | 'metal' | 'water';
 type ElementCounts = Record<ElementType, number>;
 type ElementSymbols = Record<ElementType, string>;
 type ElementDescriptions = Record<ElementType, string>;
-type ProductionCycle = Record<ElementType, ElementType>;
-type ControlCycle = Record<ElementType, ElementType>;
-type Relationship = {
-  elements: string;
-  type: string;
-  description: string;
-};
-
-interface BodyStrengthInfo {
-  type: string;
-  label: string;
-  description: string;
-}
 
 const props = defineProps<{
   baziData: Record<string, string> | null
@@ -190,24 +177,6 @@ const elementDescriptions: ElementDescriptions = {
   'earth': 'Earth represents stability, nurturing, and balance. Earth governs trustworthiness; those with strong Earth energy are steady, reliable, patient, and practical. Earth-dominant individuals are typically hardworking, service-oriented, and trustworthy, but may be conservative, stubborn, and inflexible. Earth energy is suitable for careers in agriculture, real estate, food service, and service industries.',
   'metal': 'Metal represents firmness, contraction, and inward strength. Metal governs righteousness; those with strong Metal energy are determined, methodical, detail-oriented, and have a strong sense of justice. Metal-dominant individuals typically have organizational abilities, value discipline and rules, and strive for perfection, but may be overly strict and inflexible. Metal energy is suitable for careers in finance, military/police, engineering, and manufacturing.',
   'water': 'Water represents wisdom, flexibility, and downward flow. Water governs wisdom; those with strong Water energy are intelligent, thoughtful, adaptable, and insightful. Water-dominant individuals typically have philosophical tendencies, keen intuition, and excellent communication and understanding of others, but may be suspicious, restless, and indecisive. Water energy is suitable for careers in philosophy, research, media, and trade.'
-};
-
-// Production cycle (生): Wood produces Fire, Fire produces Earth, etc.
-const productionCycle: ProductionCycle = {
-  'wood': 'fire',
-  'fire': 'earth',
-  'earth': 'metal',
-  'metal': 'water',
-  'water': 'wood'
-};
-
-// Control cycle (克): Wood controls Earth, Earth controls Water, etc.
-const controlCycle: ControlCycle = {
-  'wood': 'earth',
-  'earth': 'water',
-  'water': 'fire',
-  'fire': 'metal',
-  'metal': 'wood'
 };
 
 // Day Master detailed descriptions based on traditional Chinese metaphysics
