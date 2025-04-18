@@ -1,6 +1,17 @@
 {
+  "name": "bazi-server",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node try.js",
+    "dev": "node try.js",
+    "deploy-prepare": "node deploy-render.js"
+  },
   "dependencies": {
     "bazi-converter": "^1.0.10",
     "http": "^0.0.1-security"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

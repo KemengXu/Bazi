@@ -2,6 +2,9 @@ import BaziConverter from 'bazi-converter/BaziConverter.js'
 
 import * as http from 'http';
 
+// Use environment variable for port or default to 8080
+const PORT = process.env.PORT || 8080;
+
 http.createServer(function(req, res) {
   res.writeHead(200, {
     "Content-Type": "text/html; charset=utf-8",
@@ -22,7 +25,9 @@ http.createServer(function(req, res) {
     console.log(e);
   }
   res.end();
-}).listen(8080);
+}).listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 // //returns { year: '癸酉', month: '丁巳', day: '辛卯', time: '戊戌' }
 // console.log(bazi.getBaziJson())
@@ -38,4 +43,4 @@ http.createServer(function(req, res) {
 // console.log(bazi.translateBaziEnglish());
 
 // //returns 癸酉年丁巳月辛卯日戊戌时
-// console.log(bazi.getBaziChineseFullString());
+// console.log(bazi.getBaziFullString());

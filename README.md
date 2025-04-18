@@ -7,101 +7,110 @@ This repository contains a Ba-Zi (Eight Words) Chinese astrology application for
 - `eight-words/`: Frontend Vue.js application
 - `server/`: Backend Node.js server
 
-## Running the Server
+## Deployment Guide
 
-### Start the Server
+### Deploying the Backend (Node.js Server) on Render.com
 
-1. Navigate to the server directory:
+1. Make sure your code is committed to a Git repository
+2. Log in to [Render.com](https://render.com)
+3. Click "New" and select "Web Service"
+4. Connect your Git repository
+5. Configure the service:
+   - **Name**: bazi-server (or your preferred name)
+   - **Environment**: Node
+   - **Root Directory**: server (important!)
+   - **Build Command**: npm install
+   - **Start Command**: npm start
+6. Select your preferred region and plan (Free tier works)
+7. Click "Create Web Service"
+8. Render will automatically build and deploy your server
+9. Copy the URL provided by Render (e.g., `https://bazi-server.onrender.com`)
+
+### Updating Frontend Configuration
+
+After your backend is deployed, update the frontend environment file to use the new URL:
+
+1. Edit `eight-words/.env.production` and set:
    ```
-   cd server
+   VITE_APP_API_URL=https://your-bazi-server.onrender.com
    ```
+   (Replace with your actual Render.com URL)
 
-2. Install dependencies (first time only):
-   ```
-   npm install
-   ```
+2. Commit and push these changes to your repository
 
-3. Start the server:
-   ```
-   node server.js
-   ```
+### Deploying the Frontend on Render.com
 
-The server will start on http://localhost:8080
+You can also deploy the Vue.js frontend on Render.com:
 
-### Stop the Server
+1. Log in to [Render.com](https://render.com)
+2. Click "New" and select "Static Site"
+3. Connect your Git repository
+4. Configure the service:
+   - **Name**: bazi-frontend (or your preferred name)
+   - **Root Directory**: eight-words
+   - **Build Command**: npm install && npm run build
+   - **Publish Directory**: dist
+5. Add the environment variable:
+   - `VITE_APP_API_URL`: Your backend URL
+6. Click "Create Static Site"
 
-To stop the server, press `Ctrl+C` in the terminal where the server is running.
+### Alternative Frontend Deployment with GitHub Pages
 
-## Running the Frontend Application
+You can also use GitHub Pages for the frontend:
 
-### Start the Application
-
-1. Navigate to the eight-words directory:
-   ```
-   cd eight-words
-   ```
-
-2. Install dependencies (first time only):
-   ```
-   npm install
-   ```
-
-3. Start the development server:
-   ```
-   npm run dev
-   ```
-
-The application will start on http://localhost:5173 (or another port if 5173 is in use)
-
-### Stop the Application
-
-To stop the application, press `Ctrl+C` in the terminal where the app is running.
-
-## Deploying to GitHub Pages
-
-To deploy the application to GitHub Pages, follow these steps:
-
-1. Navigate to the eight-words directory:
+1. Make sure your backend URL is correctly set in `.env.production`
+2. Run the deployment script:
    ```
    cd eight-words
+   npm run deploy:simple
    ```
 
-2. Install the gh-pages package as a dev dependency:
-   ```
-   npm install --save-dev gh-pages
-   ```
+## Local Development
 
-3. Open the `package.json` file and add the following scripts:
-   ```json
-   "scripts": {
-     "deploy": "npm run build && gh-pages -d dist",
-     "predeploy": "vite build --base=/Bazi/"
-   }
-   ```
+### Server
 
-4. Create a `vite.config.js` file (or modify existing one) with GitHub Pages base path:
-   ```js
-   export default {
-     base: '/Bazi/',
-     // other config options...
-   }
-   ```
+```bash
+cd server
+npm install
+npm run dev
+```
 
-5. Deploy to GitHub Pages:
-   ```
-   npm run deploy
-   ```
+The server will run on http://localhost:8080
 
-6. Configure GitHub Pages:
-   - Go to your GitHub repository
-   - Navigate to Settings > Pages
-   - Set Source to "Deploy from a branch"
-   - Select the branch "gh-pages" and folder "/ (root)"
-   - Click Save
+### Frontend
 
-Your app will be available at: https://KemengXu.github.io/Bazi/
+```bash
+cd eight-words
+npm install
+npm run dev
+```
 
-Note: Since GitHub Pages only serves static content, the backend server needs to be hosted separately (e.g., on platforms like Heroku, Render, or Vercel).
+The frontend will run on http://localhost:5173
+
+## Troubleshooting
+
+### CORS Issues
+
+If you encounter CORS errors, check the Access-Control-Allow-Origin header in `server/try.js`. You may need to update it to allow your frontend domain.
+
+### Render.com Deployment Issues
+
+- Check the server logs in the Render.com dashboard
+- Verify that the "Root Directory" is correct in your service configuration
+- For the backend, make sure your package.json has the correct "start" script
+
+### GitHub Pages Deployment
+
+If you have issues with GitHub Pages deployment, try:
+```bash
+cd eight-words
+npm run predeploy
+npm run deploy
+```
+
+## License
+
+[MIT License](LICENSE)
 
 ## Features
 
